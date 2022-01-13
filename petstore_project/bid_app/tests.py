@@ -6,7 +6,7 @@ from rest_framework.test import APIClient
 from .models import PetBid, Pet
 
 
-class BidsURLTest(TestCase):
+class GetBidsTest(TestCase):
 
     def setUp(self):
         self.user = User.objects.create(username="hwary")
@@ -30,5 +30,3 @@ class BidsURLTest(TestCase):
         self.assertEqual(response.data['id'], self.bid_on_pet.id)
         self.assertEquals(response.data['bids'][0]['price'], '50.00')
         self.assertEquals(response.data['bids'][0]['pet_bidder']['username'], 'hwary')
-
-
