@@ -7,6 +7,9 @@ from django.db import IntegrityError
 from . models import Pet
 
 
+'''
+Need some permissions
+'''
 @api_view(['POST'])
 @parser_classes([JSONParser])
 def user_bid_on_pet(request):
@@ -28,7 +31,8 @@ Need some permissions
 @parser_classes([JSONParser])
 def get_bids_of_pet_per_owner(request):
     try :
-        pet = Pet.objects.get(id=request.data['pet_id'])
+        id=request.data['pet_id']
+        pet = Pet.objects.get(id=id)
         bids_data_serializer = GetBidsOfPetPerOwnerSerlaizer(pet, many=False)
         return Response(bids_data_serializer.data, status=status.HTTP_200_OK)
     except Pet.DoesNotExist:
