@@ -35,5 +35,8 @@ def get_bids_of_pet_per_owner(request):
         pet = Pet.objects.get(id=id)
         bids_data_serializer = GetBidsOfPetPerOwnerSerlaizer(pet, many=False)
         return Response(bids_data_serializer.data, status=status.HTTP_200_OK)
+        
     except Pet.DoesNotExist:
         return Response("There is no bid for this pet", status=status.HTTP_404_NOT_FOUND)
+    except KeyError as e:
+        return Response("Please provide a valid: " + str(e), status=status.HTTP_400_BAD_REQUEST)
